@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecofood - Web</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="cabecalho">
+    <h1>Ecofood</h1>
+    <nav class="passos-nav">
+      <span class="passo ativo" id="passo-cardapio">1. Cardápio</span>
+      <span class="passo" id="passo-carrinho">2. Carrinho</span>
+      <span class="passo" id="passo-agendamento">3. Agendamento</span>
+      <span class="passo" id="passo-pagamento">4. Pagamento</span>
+      <span class="passo" id="passo-sucesso">5. Confirmação</span>
+    </nav>
+  </header>
+
+  <main class="conteudo-principal">
+
+    <section id="tela-cardapio" class="tela ativa">
+      <h2>Selecione os Produtos</h2>
+      <div class="grid-produtos">
+        <div class="card-produto">
+          <h3>Tomate Orgânico</h3>
+          <p class="preco">R$ 12,00</p>
+          <button class="btn-adicionar" onclick="adicionarItem('Tomate Org.', 12)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="card-produto">
+          <h3>Bananas Orgânicas</h3>
+          <p class="preco">R$ 8,00</p>
+          <button class="btn-adicionar" onclick="adicionarItem('Bananas Org.', 8)">Adicionar ao Carrinho</button>
+        </div>
+      </div>
+      <div class="acoes-rodape">
+        <button class="btn-acao" onclick="mudarTela('tela-carrinho')">Ver Carrinho</button>
+      </div>
+    </section>
+
+    <section id="tela-carrinho" class="tela">
+      <h2>Meu Carrinho</h2>
+      <div class="painel-conteudo">
+        <div id="itens-carrinho" class="lista-carrinho-web"></div>
+        <div class="resumo-carrinho">
+          <p><strong>Total:</strong> <span id="total-carrinho">R$ 0,00</span></p>
+        </div>
+      </div>
+      <div class="acoes-rodape">
+        <button class="btn-secundario" onclick="mudarTela('tela-cardapio')">Voltar ao Cardápio</button>
+        <button class="btn-acao" onclick="mudarTela('tela-agendamento')">Prosseguir para Agendamento</button>
+      </div>
+    </section>
+
+    <section id="tela-agendamento" class="tela">
+      <h2>Agendar Entrega</h2>
+      <div class="painel-agendamento">
+        <div class="grupo-opcao">
+          <h3>Selecione o Dia:</h3>
+          <div class="dias-grid">
+            <button class="btn-dia" onclick="selecionarDia('Seg 14', this)">Seg 14</button>
+            <button class="btn-dia" onclick="selecionarDia('Ter 15', this)">Ter 15</button>
+            <button class="btn-dia" onclick="selecionarDia('Qua 16', this)">Qua 16</button>
+          </div>
+        </div>
+
+        <div class="grupo-opcao">
+          <h3>Turno:</h3>
+          <div class="opcoes-inline">
+            <label><input type="radio" name="turno" value="Manhã" onchange="pedido.turno = this.value"> Manhã</label>
+            <label><input type="radio" name="turno" value="Tarde" onchange="pedido.turno = this.value"> Tarde</label>
+            <label><input type="radio" name="turno" value="Noite" onchange="pedido.turno = this.value"> Noite</label>
+          </div>
+        </div>
+
+        <div class="grupo-opcao">
+          <h3>Horário:</h3>
+          <div class="opcoes-inline">
+            <label><input type="radio" name="horario" value="14h-15h" onchange="pedido.horario = this.value"> 14h-15h</label>
+            <label><input type="radio" name="horario" value="15h-16h" onchange="pedido.horario = this.value"> 15h-16h</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="acoes-rodape">
+        <button class="btn-secundario" onclick="mudarTela('tela-carrinho')">Voltar ao Carrinho</button>
+        <button class="btn-acao" onclick="mudarTela('tela-pagamento')">Confirmar Agendamento</button>
+      </div>
+    </section>
+
+    <section id="tela-pagamento" class="tela">
+      <h2>Forma de Pagamento</h2>
+      <div class="painel-pagamento">
+        <div class="metodos-pagamento">
+          <h3>Método:</h3>
+          <label><input type="radio" name="pagamento" value="Pix" onchange="pedido.pagamento = this.value"> Pix</label>
+          <label><input type="radio" name="pagamento" value="Cartão" onchange="pedido.pagamento = this.value"> Cartão de Crédito</label>
+        </div>
+
+        <div class="dados-cartao">
+          <h3>Cartão Rascunho:</h3>
+          <input type="text" placeholder="Número do Cartão" class="campo-input">
+          <div class="grid-campos">
+            <input type="text" placeholder="MM/AA" class="campo-input">
+            <input type="text" placeholder="CVC" class="campo-input">
+          </div>
+        </div>
+      </div>
+
+      <div class="acoes-rodape">
+        <button class="btn-secundario" onclick="mudarTela('tela-agendamento')">Voltar ao Agendamento</button>
+        <button class="btn-acao" onclick="finalizarPedido()">Pagar Agora</button>
+      </div>
+    </section>
+
+    <section id="tela-sucesso" class="tela">
+      <div class="sucesso-box">
+        <div class="icone-sucesso">✓</div>
+        <h2>Pedido Finalizado com Sucesso!</h2>
+        
+        <div class="detalhes-confirmacao">
+          <p><strong>Entrega:</strong> <span id="resumo-entrega">-</span></p>
+          <p><strong>Método de Pago:</strong> <span id="resumo-pagamento">-</span></p>
+          <p><strong>Valor Total:</strong> <span id="resumo-valor">R$ 0,00</span></p>
+        </div>
+
+        <button class="btn-acao" onclick="reiniciar()">Voltar ao Início</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
