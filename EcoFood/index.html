@@ -4,12 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ecofood - Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header class="cabecalho">
-    <h1>Ecofood</h1>
+    <h1 class="logo">🌱 Ecofood</h1>
     <nav class="passos-nav">
       <span class="passo ativo" id="passo-cardapio">1. Cardápio</span>
       <span class="passo" id="passo-carrinho">2. Carrinho</span>
@@ -17,25 +20,27 @@
       <span class="passo" id="passo-pagamento">4. Pagamento</span>
       <span class="passo" id="passo-sucesso">5. Confirmação</span>
     </nav>
+    <button class="btn-carrinho-topo" onclick="mudarTela('tela-carrinho')" aria-label="Abrir carrinho">
+      🛒 <span id="contador-carrinho">0</span>
+    </button>
   </header>
 
   <main class="conteudo-principal">
 
     <section id="tela-cardapio" class="tela ativa">
-      <h2>Selecione os Produtos</h2>
-      <div class="grid-produtos">
-        <div class="card-produto">
-          <h3>Tomate Orgânico</h3>
-          <p class="preco">R$ 12,00</p>
-          <button class="btn-adicionar" onclick="adicionarItem('Tomate Org.', 12)">Adicionar ao Carrinho</button>
+      <div class="hero">
+        <div>
+          <h2>Comida de verdade, direto do produtor</h2>
+          <p>Orgânicos frescos, colhidos e entregues no dia que você escolher.</p>
         </div>
-        <div class="card-produto">
-          <h3>Bananas Orgânicas</h3>
-          <p class="preco">R$ 8,00</p>
-          <button class="btn-adicionar" onclick="adicionarItem('Bananas Org.', 8)">Adicionar ao Carrinho</button>
-        </div>
+        <span class="hero-emoji" aria-hidden="true">🥗</span>
       </div>
+
+      <div class="filtros" id="filtros"></div>
+      <div class="grid-produtos" id="grid-produtos"></div>
+
       <div class="acoes-rodape">
+        <span></span>
         <button class="btn-acao" onclick="mudarTela('tela-carrinho')">Ver Carrinho</button>
       </div>
     </section>
@@ -50,7 +55,7 @@
       </div>
       <div class="acoes-rodape">
         <button class="btn-secundario" onclick="mudarTela('tela-cardapio')">Voltar ao Cardápio</button>
-        <button class="btn-acao" onclick="mudarTela('tela-agendamento')">Prosseguir para Agendamento</button>
+        <button class="btn-acao" onclick="irParaAgendamento()">Prosseguir para Agendamento</button>
       </div>
     </section>
 
@@ -58,7 +63,7 @@
       <h2>Agendar Entrega</h2>
       <div class="painel-agendamento">
         <div class="grupo-opcao">
-          <h3>Selecione o Dia:</h3>
+          <h3>Selecione o dia</h3>
           <div class="dias-grid">
             <button class="btn-dia" onclick="selecionarDia('Seg 14', this)">Seg 14</button>
             <button class="btn-dia" onclick="selecionarDia('Ter 15', this)">Ter 15</button>
@@ -67,26 +72,26 @@
         </div>
 
         <div class="grupo-opcao">
-          <h3>Turno:</h3>
+          <h3>Turno</h3>
           <div class="opcoes-inline">
-            <label><input type="radio" name="turno" value="Manhã" onchange="pedido.turno = this.value"> Manhã</label>
-            <label><input type="radio" name="turno" value="Tarde" onchange="pedido.turno = this.value"> Tarde</label>
-            <label><input type="radio" name="turno" value="Noite" onchange="pedido.turno = this.value"> Noite</label>
+            <label class="opcao"><input type="radio" name="turno" value="Manhã" onchange="pedido.turno = this.value"> Manhã</label>
+            <label class="opcao"><input type="radio" name="turno" value="Tarde" onchange="pedido.turno = this.value"> Tarde</label>
+            <label class="opcao"><input type="radio" name="turno" value="Noite" onchange="pedido.turno = this.value"> Noite</label>
           </div>
         </div>
 
         <div class="grupo-opcao">
-          <h3>Horário:</h3>
+          <h3>Horário</h3>
           <div class="opcoes-inline">
-            <label><input type="radio" name="horario" value="14h-15h" onchange="pedido.horario = this.value"> 14h-15h</label>
-            <label><input type="radio" name="horario" value="15h-16h" onchange="pedido.horario = this.value"> 15h-16h</label>
+            <label class="opcao"><input type="radio" name="horario" value="14h-15h" onchange="pedido.horario = this.value"> 14h-15h</label>
+            <label class="opcao"><input type="radio" name="horario" value="15h-16h" onchange="pedido.horario = this.value"> 15h-16h</label>
           </div>
         </div>
       </div>
 
       <div class="acoes-rodape">
         <button class="btn-secundario" onclick="mudarTela('tela-carrinho')">Voltar ao Carrinho</button>
-        <button class="btn-acao" onclick="mudarTela('tela-pagamento')">Confirmar Agendamento</button>
+        <button class="btn-acao" onclick="confirmarAgendamento()">Confirmar Agendamento</button>
       </div>
     </section>
 
@@ -94,14 +99,16 @@
       <h2>Forma de Pagamento</h2>
       <div class="painel-pagamento">
         <div class="metodos-pagamento">
-          <h3>Método:</h3>
-          <label><input type="radio" name="pagamento" value="Pix" onchange="pedido.pagamento = this.value"> Pix</label>
-          <label><input type="radio" name="pagamento" value="Cartão" onchange="pedido.pagamento = this.value"> Cartão de Crédito</label>
+          <h3>Método</h3>
+          <div class="opcoes-inline">
+            <label class="opcao"><input type="radio" name="pagamento" value="Pix" onchange="escolherPagamento(this.value)"> Pix</label>
+            <label class="opcao"><input type="radio" name="pagamento" value="Cartão" onchange="escolherPagamento(this.value)"> Cartão de Crédito</label>
+          </div>
         </div>
 
-        <div class="dados-cartao">
-          <h3>Cartão Rascunho:</h3>
-          <input type="text" placeholder="Número do Cartão" class="campo-input">
+        <div class="dados-cartao" id="dados-cartao" hidden>
+          <h3>Dados do cartão</h3>
+          <input type="text" placeholder="Número do Cartão" class="campo-input" inputmode="numeric">
           <div class="grid-campos">
             <input type="text" placeholder="MM/AA" class="campo-input">
             <input type="text" placeholder="CVC" class="campo-input">
@@ -119,11 +126,11 @@
       <div class="sucesso-box">
         <div class="icone-sucesso">✓</div>
         <h2>Pedido Finalizado com Sucesso!</h2>
-        
+
         <div class="detalhes-confirmacao">
           <p><strong>Entrega:</strong> <span id="resumo-entrega">-</span></p>
-          <p><strong>Método de Pago:</strong> <span id="resumo-pagamento">-</span></p>
-          <p><strong>Valor Total:</strong> <span id="resumo-valor">R$ 0,00</span></p>
+          <p><strong>Método de pagamento:</strong> <span id="resumo-pagamento">-</span></p>
+          <p><strong>Valor total:</strong> <span id="resumo-valor">R$ 0,00</span></p>
         </div>
 
         <button class="btn-acao" onclick="reiniciar()">Voltar ao Início</button>
@@ -132,6 +139,7 @@
 
   </main>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>
 </html>
