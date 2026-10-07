@@ -1,18 +1,18 @@
 const produtos = [
-  { id: 1,  nome: 'Tomate Orgânico',     preco: 12, unidade: 'kg',      categoria: 'Frutas e Verduras', emoji: '🍅', cor: '#fde2dc', desc: 'Maduro, doce e colhido no pé.'},
-  { id: 2,  nome: 'Bananas Orgânicas',   preco: 8,  unidade: 'dúzia',   categoria: 'Frutas e Verduras', emoji: '🍌', cor: '#fdf1c4', desc: 'Prata, sem agrotóxicos.'},
-  { id: 3,  nome: 'Alface Crespa',       preco: 5,  unidade: 'unid.',   categoria: 'Frutas e Verduras', emoji: '🥬', cor: '#dff2d4', desc: 'Folhas crocantes hidropônicas.'},
-  { id: 4,  nome: 'Cenoura Orgânica',    preco: 7,  unidade: 'kg',      categoria: 'Frutas e Verduras', emoji: '🥕', cor: '#fde4cc', desc: 'Firme e adocicada.'},
-  { id: 5,  nome: 'Abacate',             preco: 10, unidade: 'kg',      categoria: 'Frutas e Verduras', emoji: '🥑', cor: '#e2efc9', desc: 'Cremoso, no ponto de comer.'},
-  { id: 6,  nome: 'Morangos',            preco: 15, unidade: 'bandeja', categoria: 'Frutas e Verduras', emoji: '🍓', cor: '#fbd9de', desc: 'Doces e sem conservantes.'},
-  { id: 7,  nome: 'Ovos Caipiras',       preco: 16, unidade: 'dúzia',   categoria: 'Proteínas',         emoji: '🥚', cor: '#f6ecda', desc: 'De galinhas criadas soltas.'},
-  { id: 8,  nome: 'Filé de Tilápia',     preco: 32, unidade: 'kg',      categoria: 'Proteínas',         emoji: '🐟', cor: '#d9ecf5', desc: 'Pesca sustentável, sem espinhas.'},
-  { id: 9,  nome: 'Peito de Frango Caipira', preco: 28, unidade: 'kg',  categoria: 'Proteínas',         emoji: '🍗', cor: '#f8e2cf', desc: 'Criação livre e alimentação natural.'},
-  { id: 10, nome: 'Pão Integral',        preco: 14, unidade: 'unid.',   categoria: 'Padaria',           emoji: '🍞', cor: '#f0e0c8', desc: 'Fermentação natural, 100% integral.'},
-  { id: 11, nome: 'Granola Artesanal',   preco: 18, unidade: '500 g',   categoria: 'Padaria',           emoji: '🥣', cor: '#efe3cf', desc: 'Aveia, castanhas e mel.'},
-  { id: 12, nome: 'Suco Verde Prensado', preco: 11, unidade: '300 ml',  categoria: 'Bebidas',           emoji: '🥤', cor: '#d8f0d2', desc: 'Couve, maçã, limão e gengibre.'},
-  { id: 13, nome: 'Água de Coco',        preco: 6,  unidade: '330 ml',  categoria: 'Bebidas',           emoji: '🥥', cor: '#e6f1ee', desc: 'Natural, direto do coco.'},
-  { id: 14, nome: 'Mel Puro',            preco: 25, unidade: '300 g',   categoria: 'Despensa',          emoji: '🍯', cor: '#fbe7b0', desc: 'De apiários locais.'}
+  { id: 1,  nome: 'Tomate Orgânico',     preco: 12, unidade: 'kg',      categoria: 'Frutas e Verduras', foto: 'tomate.jpg', cor: '#fde2dc', desc: 'Maduro, doce e colhido no pé.'},
+  { id: 2,  nome: 'Bananas Orgânicas',   preco: 8,  unidade: 'dúzia',   categoria: 'Frutas e Verduras', foto: 'banana.jpg', cor: '#fdf1c4', desc: 'Prata, sem agrotóxicos.'},
+  { id: 3,  nome: 'Alface Crespa',       preco: 5,  unidade: 'unid.',   categoria: 'Frutas e Verduras', foto: 'alface.jpg', cor: '#dff2d4', desc: 'Folhas crocantes hidropônicas.'},
+  { id: 4,  nome: 'Cenoura Orgânica',    preco: 7,  unidade: 'kg',      categoria: 'Frutas e Verduras', foto: 'cenoura.jpg', cor: '#fde4cc', desc: 'Firme e adocicada.'},
+  { id: 5,  nome: 'Abacate',             preco: 10, unidade: 'kg',      categoria: 'Frutas e Verduras', foto: 'abacate.jpg', cor: '#e2efc9', desc: 'Cremoso, no ponto de comer.'},
+  { id: 6,  nome: 'Morangos',            preco: 15, unidade: 'bandeja', categoria: 'Frutas e Verduras', foto: 'morango.jpg', cor: '#fbd9de', desc: 'Doces e sem conservantes.'},
+  { id: 7,  nome: 'Ovos Caipiras',       preco: 16, unidade: 'dúzia',   categoria: 'Proteínas',         foto: 'ovos.jpg', cor: '#f6ecda', desc: 'De galinhas criadas soltas.'},
+  { id: 8,  nome: 'Filé de Tilápia',     preco: 32, unidade: 'kg',      categoria: 'Proteínas',         foto: 'file_de_tilapia.jpg', cor: '#d9ecf5', desc: 'Pesca sustentável, sem espinhas.'},
+  { id: 9,  nome: 'Peito de Frango Caipira', preco: 28, unidade: 'kg',  categoria: 'Proteínas',         foto: 'peito_de_frango.jpg', cor: '#f8e2cf', desc: 'Criação livre e alimentação natural.'},
+  { id: 10, nome: 'Pão Integral',        preco: 14, unidade: 'unid.',   categoria: 'Padaria',           foto: 'pao.jpg', cor: '#f0e0c8', desc: 'Fermentação natural, 100% integral.'},
+  { id: 11, nome: 'Granola Artesanal',   preco: 18, unidade: '500 g',   categoria: 'Padaria',           foto: 'granola.jpg', cor: '#efe3cf', desc: 'Aveia, castanhas e mel.'},
+  { id: 12, nome: 'Suco Verde Prensado', preco: 11, unidade: '300 ml',  categoria: 'Bebidas',           foto: 'suco.jpg', cor: '#d8f0d2', desc: 'Couve, maçã, limão e gengibre.'},
+  { id: 13, nome: 'Água de Coco',        preco: 6,  unidade: '330 ml',  categoria: 'Bebidas',           foto: 'agua_de_coco.jpg', cor: '#e6f1ee', desc: 'Natural, direto do coco.'},
+  { id: 14, nome: 'Mel Puro',            preco: 25, unidade: '300 g',   categoria: 'Despensa',          foto: 'mel.jpg', cor: '#fbe7b0', desc: 'De apiários locais.'}
 ];
 
 let carrinho = [];           // { id, nome, preco, qtd }
